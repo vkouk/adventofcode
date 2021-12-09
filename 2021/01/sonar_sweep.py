@@ -12,7 +12,7 @@ def sum_3d_values(values):
 
 
 def convert_to_3d(arr):
-    output = []
+    output = list()
 
     for index, value in enumerate(arr):
         if index + 2 < len(arr):
