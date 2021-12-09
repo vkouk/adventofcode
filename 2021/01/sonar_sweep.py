@@ -8,7 +8,7 @@ def parse_values(values):
 
 
 def sum_3d_values(values):
-    return list(map(lambda x: sum(x), values))
+    return list(map(sum, values))
 
 
 def convert_to_3d(arr):
