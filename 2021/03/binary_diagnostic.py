@@ -1,10 +1,54 @@
 from collections import Counter
 
-file = open('input.txt')
+with open('input.txt') as file:
+    data = [x for x in file.read().split()]
 
 
-def binary_to_decimal(binary):
+def binary_to_int(binary):
     return int(binary, 2)
+
+
+def find_o2(arr):
+    index = 0
+    while len(arr) > 1:
+        zeros = list()
+        ones = list()
+
+        for item in range(0, len(arr)):
+            if arr[item][index] == '0':
+                zeros.append(arr[item])
+            else:
+                ones.append(arr[item])
+
+        if len(zeros) > len(ones):
+            arr = zeros
+        else:
+            arr = ones
+
+        index += 1
+
+    return arr.pop()
+
+
+def find_co2(arr):
+    index = 0
+    while len(arr) > 1:
+        zeros = list()
+        ones = list()
+        for item in range(0, len(arr)):
+            if arr[item][index] == '0':
+                zeros.append(arr[item])
+            else:
+                ones.append(arr[item])
+
+        if len(ones) < len(zeros):
+            arr = ones
+        else:
+            arr = zeros
+
+        index += 1
+
+    return arr.pop()
 
 
 def split_binary_vertically(arr):
@@ -41,11 +85,10 @@ def least_common_binary(arr):
 
 
 if __name__ == '__main__':
-    binary_list = split_binary_vertically(file)
-    most_common = common_binary(binary_list)
-    least_common = least_common_binary(binary_list)
-    most_common_decimal = binary_to_decimal(most_common)
-    least_common_decimal = binary_to_decimal(least_common)
-    print('results', most_common_decimal * least_common_decimal)
+    o2 = binary_to_int(find_o2(data.copy()))
+    co2 = binary_to_int(find_co2(data.copy()))
+    result = o2 * co2
+
+    print('results', result)
 
 file.close()
